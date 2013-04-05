@@ -13,8 +13,9 @@ var BugDispatch = {
     	fly_width: 13,
 	 	fly_height: 14,
 	 	num_frames: 5,
-		monitorMouseMovement: true,
+		monitorMouseMovement: false,
 		eventDistanceToBug: 40,
+		minTimeBetweenMultipy: 1000, 
 		mouseOver: 'multiply' // can be 'fly' or 'multiply'
 	},
 
@@ -57,7 +58,6 @@ var BugDispatch = {
 		// make bugs:
 		this.bugs = [];
 		var numBugs = (this.options.mouseOver == 'multiply') ? this.options.minBugs : this.random(this.options.minBugs, this.options.maxBugs, true);
-		
 		for(var i = 0; i<numBugs; i++) {
 			var options = {
 				imageSprite: this.options.imageSprite,
@@ -76,16 +76,15 @@ var BugDispatch = {
 		for(var i = 0; i< numBugs; i++) {
 			var delay = this.random(this.options.minDelay, this.options.maxDelay, true),
 				thebug = this.bugs[i];
-			setTimeout(function(){
-				thebug.flyIn();
-			}, delay);
+			// fly the bug onto the page:
+			setTimeout((function(thebug){
+				return function() {
+					thebug.flyIn();
+				};
+			})(thebug), delay);
 
-			this.bugs[i].bug.addEventListener('mouseover', function(e){
-				var e = e || window.event,
-					t = e.relatedTarget || e.fromElement;
-
-				that.on_bug(thebug);
-			});
+			// add mouse over events:
+			that.add_events_to_bug(thebug);
 		}
 		
 		// add window event if required:
@@ -95,6 +94,15 @@ var BugDispatch = {
 			};
 		}
 		
+	},
+
+	add_events_to_bug: function(thebug) {
+		var that = this;
+		if(thebug.bug) {
+			thebug.bug.addEventListener('mouseover', function(e){
+				that.on_bug(thebug);
+			});
+		}
 	},
 	
 	check_if_mouse_close_to_bug: function(e) {
@@ -161,8 +169,10 @@ var BugDispatch = {
 				this.multiplyDelay = true;
 				var that = this;
 				setTimeout(function(){
+					// add event to this bug:
+					that.add_events_to_bug(b);
 					that.multiplyDelay = false;
-				}, 2000);
+				}, this.options.minTimeBetweenMultipy);
 			}
 			
 		}
