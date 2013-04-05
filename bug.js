@@ -6,7 +6,7 @@ var BugDispatch = {
 		minDelay: 500,
 		maxDelay: 10000,
 		minBugs: 1,
-		maxBugs: 1,
+		maxBugs: 30,
 		minSpeed: 1,
 		maxSpeed: 3,
 		imageSprite: 'fly-sprite.png',
@@ -56,7 +56,7 @@ var BugDispatch = {
 
 		// make bugs:
 		this.bugs = [];
-		var numBugs = this.random(this.options.minBugs, this.options.maxBugs, true);
+		var numBugs = (this.options.mouseOver == 'multiply') ? this.options.minBugs : this.random(this.options.minBugs, this.options.maxBugs, true);
 		
 		for(var i = 0; i<numBugs; i++) {
 			var options = {
@@ -137,7 +137,7 @@ var BugDispatch = {
 			bug.stop();
 			bug.flyRand();
 		} else if(this.options.mouseOver == 'multiply') {
-			if(!this.multiplyDelay) {
+			if(!this.multiplyDelay && this.bugs.length < this.options.maxBugs) {
 				// spawn another: 
 				// create new bug:
 				var b = SpawnBug(); //new Bug(this.transform, options);
