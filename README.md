@@ -26,9 +26,13 @@ How to use
 ----------
 
 Include the JS somewhere, and then initialize with 
- new BugController();
+```js
+  new BugController();
+```
 or
- new BugController({'minBugs':10, 'maxBugs':50, 'mouseOver':'die'});
+```js
+  new BugController({'minBugs':10, 'maxBugs':50, 'mouseOver':'die'});
+```
 See example.html 
 
 BugController constructor can optionally take an object of options. To make this js more async friendly, you can adjust the default options at the top of bug.js, and then instantiate at the bottom of the file as above. 
