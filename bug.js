@@ -1,3 +1,14 @@
+// ==ClosureCompiler==
+// @compilation_level SIMPLE_OPTIMIZATIONS
+// @output_file_name bug-min.js
+// ==/ClosureCompiler==
+
+/**
+ * @preserve Bug.js - https://github.com/Auz/Bug
+ * Released under MIT-style license.
+ * Original Screen Bug http://screen-bug.googlecode.com/git/index.html
+ */
+
 /**
 * Bug.js - Add bugs to your page
 *
