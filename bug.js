@@ -6,7 +6,7 @@ var BugDispatch = {
 		minDelay: 500,
 		maxDelay: 10000,
 		minBugs: 1,
-		maxBugs: 30,
+		maxBugs: 20,
 		minSpeed: 1,
 		maxSpeed: 3,
 		imageSprite: 'fly-sprite.png',
@@ -16,12 +16,13 @@ var BugDispatch = {
 		monitorMouseMovement: false,
 		eventDistanceToBug: 40,
 		minTimeBetweenMultipy: 1000, 
-		mouseOver: 'multiply' // can be 'fly' or 'multiply'
+		mouseOver: 'random' // can be 'fly', 'die', 'multiply', or 'random'
 	},
 
 	initialize: function(options){
 		this.options = merge_options(this.options, options);
 
+		this.modes = ['die', 'multiply', 'fly'];
 		// can we transform?
 		this.transform = null;
 		
@@ -140,11 +141,19 @@ var BugDispatch = {
 	},
 
 	on_bug: function(bug) {
-		if(this.options.mouseOver == 'fly') {
+		if(!bug.alive) return;
+
+		var mode = this.options.mouseOver;
+		if(mode == 'random') {
+			mode = this.modes[(this.random(0, (this.modes.length-1), true))];
+		}
+		if(mode == 'fly') {
 			// fly away!
 			bug.stop();
 			bug.flyRand();
-		} else if(this.options.mouseOver == 'multiply') {
+		} else if(mode == 'die') {
+			bug.die();
+		} else if(mode == 'multiply') {
 			if(!this.multiplyDelay && this.bugs.length < this.options.maxBugs) {
 				// spawn another: 
 				// create new bug:
@@ -242,6 +251,7 @@ var Bug = {
     this.transform = transform;
     this.walkIndex = 0;
     this.flyIndex = 0;
+    this.alive = true;
 
     this.rad2deg_k = 180 / Math.PI;
     this.deg2rad_k = Math.PI / 180;
@@ -401,10 +411,10 @@ var Bug = {
 	  	that = this;
 	  
 	  if(Math.abs(diffx) + Math.abs(diffy) < 50) {
-		  this.bug.style.backgroundPosition = (-2 * this.options.fly_width) + 'px 100%';
+		  this.bug.style.backgroundPosition = (-2 * this.options.fly_width) + 'px -'+(2*this.options.fly_height)+'px';
 	  }
 	  if(Math.abs(diffx) + Math.abs(diffy) < 30) {
-		  this.bug.style.backgroundPosition = (-1 * this.options.fly_width) + 'px 100%';
+		  this.bug.style.backgroundPosition = (-1 * this.options.fly_width) + 'px -'+(2*this.options.fly_height)+'px';
 	  }
 	  if(Math.abs(diffx) + Math.abs(diffy) < 10) {
 		  // close enough:
@@ -516,7 +526,7 @@ var Bug = {
 		  style.top = Math.random() * windowY;
 		  style.left = -40;
 	  }
-	  style['background-position'] = (-3 * this.options.fly_width) + 'px 100%';
+	  style['background-position'] = (-3 * this.options.fly_width) + 'px -'+(2*this.options.fly_height)+'px';
 	  for(var s in style) {
 		this.bug.style[s] = style[s];
 	  }
@@ -567,6 +577,67 @@ var Bug = {
 		  style.left = -200;
 	  }
 	  this.startFlying(style);
+  },
+
+  die: function() {
+  	this.stop();
+  	//pick death style:
+  	var deathType = this.random(0, 2);
+  	this.bug.style.backgroundPosition = '-'+((deathType * 2) * this.options.fly_width)+'px -'+(3*this.options.fly_height)+'px';
+  	this.alive = false;
+  	this.drop(deathType);
+  },
+
+  drop: function(deathType) {
+  	var startPos = this.getPos().top,
+  		finalPos = window.innerHeight|| e.clientHeight|| g.clientHeight,
+  		finalPos = finalPos - this.options.fly_height,
+  		rotationRate = this.random(0, 20, true),
+  		startTime = Date.now(), that = this;
+
+  	this.dropTimer = setInterval(function(){
+  		that.dropping(startTime, startPos, finalPos, rotationRate, deathType);
+  	}, 20);
+
+  },
+
+  dropping: function(startTime, startPos, finalPos, rotationRate, deathType) {
+  	var currentTime = Date.now(),
+  		elapsedTime = currentTime - startTime, 
+  		deltaPos = (0.002 * (elapsedTime * elapsedTime)),
+  		newPos = startPos + deltaPos;
+  		//console.log(elapsedTime, deltaPos, newPos);
+  		if(newPos >= finalPos) {
+  			newPos = finalPos;
+  			clearTimeout(this.dropTimer);
+  			this.angle_deg = 0;
+  			this.angle_rad = this.deg2rad(this.angle_deg);
+	  		this.transform("rotate(" + (90 - this.angle_deg) + "deg)");
+	  		this.bug.style.top = null;
+	  		this.bug.style.bottom = '-1px';
+
+
+	  		this.twitch(deathType);
+
+	  		return;
+  		}
+
+  		this.angle_deg = ((this.angle_deg + rotationRate) % 360);
+  		this.angle_rad = this.deg2rad(this.angle_deg);
+  		this.transform("rotate(" + (90 - this.angle_deg) + "deg)");
+  		this.bug.style.top = newPos+'px';
+  },
+
+  twitch: function(deathType, legPos) {
+  	//this.bug.style.back
+  	if(!legPos) legPos = 0;
+  	var that = this;
+  	if(deathType === 0 || deathType === 1) {
+  		setTimeout(function(){
+  			that.bug.style.backgroundPosition = '-'+((deathType * 2 + (legPos%2)) * that.options.fly_width)+'px -'+(3*that.options.fly_height)+'px';
+  			that.twitch(deathType, ++legPos);
+  		}, this.random(100, 1000));
+  	}
   },
 
   /* helper methods: */
