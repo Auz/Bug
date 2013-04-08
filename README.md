@@ -66,3 +66,10 @@ Modes
 * flyoff: The bug will fly off the screen... and slowly work its way back
 * multiply: The bug will spawn a new bug and both will fly away to other parts of the page
 * die: The bug will be struck dead, and fall to the bottom of the page
+
+Credits
+-------
+
+Original Screen Bug http://screen-bug.googlecode.com/git/index.html
+Copyright ©2011 Kernc (kerncece ^_^ gmail)
+Released under WTFPL license.
