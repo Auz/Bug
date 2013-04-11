@@ -21,7 +21,7 @@ http://jsfiddle.net/snfmn/
 Dependancies
 ------------
 
-* None, all native js code
+None, all native js code
 
 
 Compatibility
