@@ -106,6 +106,9 @@ var BugDispatch = {
         break;
       }
     }
+    
+    // dont support transforms... quit
+    if(!this.transform) return;
 
     // make bugs:
     this.bugs = [];
@@ -152,7 +155,8 @@ var BugDispatch = {
   add_events_to_bug: function (thebug) {
     var that = this;
     if (thebug.bug) {
-      thebug.bug.addEventListener('mouseover', function (e) {
+      var listener = thebug.bug.addEventListener || thebug.bug.attachEvent;
+      listener('mouseover', function (e) {
         that.on_bug(thebug);
       });
     }
