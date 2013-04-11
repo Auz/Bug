@@ -11,15 +11,23 @@ Features
 * Creates multiple fruit flies which fly and walk around the page.
 * Flys are responsive to mouse movements (optional) and mouse overs events.
 
-Dependancies
-------------
-
-* None, all native js code
 
 Demo
 ----
 
 http://jsfiddle.net/snfmn/
+
+
+Dependancies
+------------
+
+* None, all native js code
+
+
+Compatibility
+-------------
+
+Works on all browsers that support CSS3 transforms, even mobile (that I've tested). See http://caniuse.com/transforms2d
 
 
 How to use 
