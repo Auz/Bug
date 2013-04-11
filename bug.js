@@ -155,10 +155,15 @@ var BugDispatch = {
   add_events_to_bug: function (thebug) {
     var that = this;
     if (thebug.bug) {
-      var listener = thebug.bug.addEventListener || thebug.bug.attachEvent;
-      listener('mouseover', function (e) {
-        that.on_bug(thebug);
-      });
+      if(thebug.bug.addEventListener) {
+  		  thebug.bug.addEventListener('mouseover', function (e) {
+				  that.on_bug(thebug);
+			  });
+		  } else if(thebug.bug.attachEvent) {
+			  thebug.bug.attachEvent('onmouseover', function(e){
+			  	that.on_bug(thebug);
+			  });
+		  }
     }
   },
 
