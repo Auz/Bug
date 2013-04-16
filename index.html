@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset='utf-8'>
+    <meta http-equiv="X-UA-Compatible" content="chrome=1">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <link href='https://fonts.googleapis.com/css?family=Architects+Daughter' rel='stylesheet' type='text/css'>
+    <link rel="stylesheet" type="text/css" href="stylesheets/stylesheet.css" media="screen" />
+    <link rel="stylesheet" type="text/css" href="stylesheets/pygment_trac.css" media="screen" />
+    <link rel="stylesheet" type="text/css" href="stylesheets/print.css" media="print" />
+
+    <!--[if lt IE 9]>
+    <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+
+    <title>Bug by Auz</title>
+  </head>
+
+  <body>
+    <header>
+      <div class="inner">
+        <h1>Bug</h1>
+        <h2>Add bugs to your website</h2>
+        <a href="https://github.com/Auz/Bug" class="button"><small>View project on</small>GitHub</a>
+      </div>
+    </header>
+
+    <div id="content-wrapper">
+      <div class="inner clearfix">
+        <section id="main-content">
+          <h1>Bug</h1>
+
+<p>Adds bugs to your page. </p>
+
+<h2>Features</h2>
+
+<ul>
+<li>Creates multiple fruit flies which fly and walk around the page.</li>
+<li>Flys are responsive to mouse movements (optional) and mouse overs events.</li>
+</ul><h2>Demo</h2>
+
+<p><a href="http://jsfiddle.net/snfmn/">http://jsfiddle.net/snfmn/</a></p>
+
+<h2>Dependancies</h2>
+
+<p>None, all native js code</p>
+
+<h2>Compatibility</h2>
+
+<p>Works on all browsers that support CSS3 transforms, even mobile (that I've tested). See <a href="http://caniuse.com/transforms2d">http://caniuse.com/transforms2d</a></p>
+
+<h2>How to use</h2>
+
+<p>Include the JS somewhere, and then initialize with </p>
+
+<div class="highlight"><pre>  <span class="k">new</span> <span class="nx">BugController</span><span class="p">();</span>
+</pre></div>
+
+<p>or</p>
+
+<div class="highlight"><pre>  <span class="k">new</span> <span class="nx">BugController</span><span class="p">({</span><span class="s1">'minBugs'</span><span class="o">:</span><span class="mi">10</span><span class="p">,</span> <span class="s1">'maxBugs'</span><span class="o">:</span><span class="mi">50</span><span class="p">,</span> <span class="s1">'mouseOver'</span><span class="o">:</span><span class="s1">'die'</span><span class="p">});</span>
+</pre></div>
+
+<p>See example.html </p>
+
+<p>BugController constructor can optionally take an object of options. To make this js more async friendly, you can adjust the default options at the top of bug.js, and then instantiate at the bottom of the file as above. This will allow one to wrap the entire script in a closure to prevent any global window name space overlaps.</p>
+
+<h2>Options</h2>
+
+<ul>
+<li>minDelay - Minimum delay before a bug will appear on the page. (default: 500)</li>
+<li>maxDelay - Maximum delay before a bug will appear on the page. (default: 10000)</li>
+<li>minBugs - Minumum number of bugs to show. (default: 1)</li>
+<li>maxBugs - Maximum number of bugs to show. (default: 20)</li>
+<li>minSpeed - Minimum speed of a bug, in no particular units. (default: 1)</li>
+<li>maxSpeed - Maximum speed of a bug, in no particular units. (default: 3)</li>
+<li>imageSprite - Location of the fly sprite sheet. (default: 'fly-sprite.png')</li>
+<li>fly_width - The width of the fly sprite cell, and also div width. (default: 13)</li>
+<li>fly_height - The height of the fly sprite cell, and also div height. (default: 14)</li>
+<li>num_frames - The number of frames in the sprite walk animation. (default: 5)</li>
+<li>monitorMouseMovement - If enabled, a mousemove event will be added to the window, and used to detect if the cursor is near a fly. Probably best to leave this one off. (default: false)</li>
+<li>eventDistanceToBug - If monitorMouseMovemenet is enabled, this is the distance from the bug in pixels which will trigger the near bug event. (default: 40)</li>
+<li>minTimeBetweenMultipy - When in 'multiply' mode, this is the minimum time in ms between a multiply event. (default: 1000)</li>
+<li>mouseOver - What to do when the mouse is over (or near) a fly. Can be 'fly', 'flyoff', 'die', 'multiply', or 'random'. See Modes. (default: random)</li>
+</ul><h2>Modes</h2>
+
+<ul>
+<li>random: Randomly pick one of the other modes on each mouse over/near event</li>
+<li>fly: The bug will fly away to another random point on the page</li>
+<li>flyoff: The bug will fly off the screen... and slowly work its way back</li>
+<li>multiply: The bug will spawn a new bug and both will fly away to other parts of the page</li>
+<li>die: The bug will be struck dead, and fall to the bottom of the page</li>
+</ul><h2>Credits</h2>
+
+<p>Original Screen Bug <a href="http://screen-bug.googlecode.com/git/index.html">http://screen-bug.googlecode.com/git/index.html</a></p>
+
+<p>Released under WTFPL license.</p>
+        </section>
+
+        <aside id="sidebar">
+          <a href="https://github.com/Auz/Bug/zipball/master" class="button">
+            <small>Download</small>
+            .zip file
+          </a>
+          <a href="https://github.com/Auz/Bug/tarball/master" class="button">
+            <small>Download</small>
+            .tar.gz file
+          </a>
+
+          <p class="repo-owner"><a href="https://github.com/Auz/Bug"></a> is maintained by <a href="https://github.com/Auz">Auz</a>.</p>
+
+          <p>This page was generated by <a href="pages.github.com">GitHub Pages</a> using the Architect theme by <a href="http://twitter.com/jasonlong">Jason Long</a>.</p>
+        </aside>
+      </div>
+    </div>
+
+  
+  </body>
+</html>
