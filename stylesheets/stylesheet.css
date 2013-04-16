@@ -67,7 +67,7 @@ header {
   padding-top: 40px;
   padding-bottom: 40px;
   font-family: 'Architects Daughter', 'Helvetica Neue', Helvetica, Arial, serif; 
-  background: #2e7bcf url(../images/header-bg.jpg) 0 0 repeat-x;
+  background: #2e7bcf;
   border-bottom: solid 1px #275da1;
 }
 
@@ -232,7 +232,7 @@ form {
 } 
 
 #main-content h1:before {
-  content: "/";
+  /*content: "/";*/
   color: #9ddcff;
   padding-right: 0.3em;
   margin-left: -0.9em;
@@ -246,7 +246,7 @@ form {
   color: #474747;
 } 
 #main-content h2:before {
-  content: "//";
+  /*content: "//"; */
   color: #9ddcff;
   padding-right: 0.3em;
   margin-left: -1.5em;
