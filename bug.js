@@ -69,7 +69,7 @@ var BugDispatch = {
         this.bug.style.MozTransform = s;
       },
       'WebkitTransform': function (s) {
-        this.bug.style.WebkitTransform = s;
+        this.bug.style.webkitTransform = s;
       },
       'OTransform': function (s) {
         this.bug.style.OTransform = s;
@@ -87,23 +87,27 @@ var BugDispatch = {
 
     this.transforms = {
       'Moz': this.transformFns.MozTransform,
-      'Webkit': this.transformFns.WebkitTransform,
+      'webkit': this.transformFns.WebkitTransform,
       'O': this.transformFns.OTransform,
-      'Ms': this.transformFns.MsTransform,
+      'ms': this.transformFns.MsTransform,
       'Khtml': this.transformFns.KhtmlTransform,
       'w3c': this.transformFns.W3Ctransform
     };
 
+    // check to see if it is a modern browser:
     if ('transform' in document.documentElement.style) {
       this.transform = this.transforms.w3c;
-    }
-    var vendors = ['Moz', 'Webkit', 'O', 'Ms', 'Khtml'],
-      i = 0,
-      that = this;
-    for (i = 0; i < vendors.length; i++) {
-      if (vendors[i] + 'Transform' in document.documentElement.style) {
-        this.transform = this.transforms[vendors[i]];
-        break;
+    } else {
+
+      // feature detection for the other transforms:
+      var vendors = ['Moz', 'webkit', 'O', 'ms', 'Khtml'],
+        i = 0;
+
+      for (i = 0; i < vendors.length; i++) {
+        if (vendors[i] + 'Transform' in document.documentElement.style) {
+          this.transform = this.transforms[vendors[i]];
+          break;
+        }
       }
     }
     
