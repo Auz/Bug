@@ -128,7 +128,7 @@ var BugDispatch = {
           num_frames: this.options.num_frames,
           wingsOpen: (Math.random() > 0.5) ? true : false,
           walkSpeed: this.random(this.options.minSpeed, this.options.maxSpeed)
-      	},
+        },
         b = SpawnBug();
       b.initialize(this.transform, options);
       this.bugs.push(b);
@@ -162,14 +162,14 @@ var BugDispatch = {
     var that = this;
     if (thebug.bug) {
       if(thebug.bug.addEventListener) {
-  		  thebug.bug.addEventListener('mouseover', function (e) {
-				  that.on_bug(thebug);
-			  });
-		  } else if(thebug.bug.attachEvent) {
-			  thebug.bug.attachEvent('onmouseover', function(e){
-			  	that.on_bug(thebug);
-			  });
-		  }
+        thebug.bug.addEventListener('mouseover', function (e) {
+          that.on_bug(thebug);
+        });
+      } else if(thebug.bug.attachEvent) {
+        thebug.bug.attachEvent('onmouseover', function(e){
+          that.on_bug(thebug);
+        });
+      }
     }
   },
 
@@ -225,11 +225,11 @@ var BugDispatch = {
       bug.stop();
       bug.flyRand();
     } else if (mode === 'flyoff') {
-    	// fly away and off the page
+      // fly away and off the page
       bug.stop();
       bug.flyOff();
     } else if (mode === 'die') {
-    	// drop dead!
+      // drop dead!
       bug.die();
     } else if (mode === 'multiply') {
       if (!this.multiplyDelay && this.bugs.length < this.options.maxBugs) {
@@ -453,6 +453,8 @@ var Bug = {
     }
     if (top && left) {
       this.setPos(top, left);
+    } else {
+      this.setPos(this.bug.top, this.bug.left)
     }
     if (!this.inserted) {
       this.inserted = true;
@@ -593,7 +595,7 @@ var Bug = {
       style.top = -20;
       style.left = Math.random() * windowX;
     } else if (side === 1) {
-    	// right:
+      // right:
       style.top = Math.random() * windowY;
       style.left = windowX + 50;
     } else if (side === 2) {
@@ -605,10 +607,10 @@ var Bug = {
       style.top = Math.random() * windowY;
       style.left = -40;
     }
-    style['background-position'] = (-3 * this.options.fly_width) + 'px -' + (2 * this.options.fly_height) + 'px';
-    for (s in style) {
-      this.bug.style[s] = style[s];
-    }
+    
+    this.bug.style.backgroundPosition = (-3 * this.options.fly_width) + 'px -' + (2 * this.options.fly_height) + 'px';
+    this.bug.top = style.top
+    this.bug.left = style.left
 
     this.drawBug();
     
