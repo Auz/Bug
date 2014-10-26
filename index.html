@@ -38,7 +38,8 @@
 <h2>Features</h2>
 
 <ul>
-<li>Creates multiple fruit flies which fly and walk around the page.</li>
+<li>Creates multiple fruit flies which fly and walk around the page, and/or,</li>
+<li>Creates multiple spiders which walk around the page.</li>
 <li>Flys are responsive to mouse movements (optional) and mouse overs events.</li>
 </ul><h2>Demo</h2>
 
@@ -64,9 +65,32 @@
 <div class="highlight"><pre>  <span class="k">new</span> <span class="nx">BugController</span><span class="p">({</span><span class="s1">'minBugs'</span><span class="o">:</span><span class="mi">10</span><span class="p">,</span> <span class="s1">'maxBugs'</span><span class="o">:</span><span class="mi">50</span><span class="p">,</span> <span class="s1">'mouseOver'</span><span class="o">:</span><span class="s1">'die'</span><span class="p">});</span>
 </pre></div>
 
+<p>Or spiders (helper class which loads spider defaults- otherwise the code is the same)</p>
+
+<div class="highlight"><pre>  <span class="k">new</span> <span class="nx">SpiderController</span><span class="p">();</span>
+</pre></div>
+
 <p>See example.html </p>
 
-<p>BugController constructor can optionally take an object of options. To make this js more async friendly, you can adjust the default options at the top of bug.js, and then instantiate at the bottom of the file as above. This will allow one to wrap the entire script in a closure to prevent any global window name space overlaps.</p>
+<p>BugController constructor can optionally take an object of options. To make this js more async friendly, you can adjust the default options at the top of bug.js, and then instantiate at the bottom of the file as above. This will allow one to wrap the entire script in a closure to prevent any global window name space overlaps. Or you can load async with the usual async pattern:</p>
+
+
+<div class="highlight"><pre>  <span class="k">var</span> <span class="nx">targethead</span> = window.document.getElementsByTagName("head")[0],
+    loadedSpiders = false,
+    jst = window.document.createElement(<span class="s1">"script"</span>);
+  jst.async = <span class="mi">true</span>;
+  jst.type = <span class="s1">"text/javascript"</span>;
+  jst.src = <span class="s1">"/path/to/bug-min.js"</span>;
+  jst.onload = jst.onreadystatechange = function() {
+    if (!loadedSpiders && (!this.readyState || this.readyState == <span class="s1">'complete'</span>)) {
+      loadedSpiders = <span class="mi">true</span>;
+      // start fire the JS.
+      new BugController();
+    }
+  };
+  targethead.appendChild(jst);
+</pre></div>
+
 
 <h2>Options</h2>
 
@@ -84,7 +108,13 @@
 <li>monitorMouseMovement - If enabled, a mousemove event will be added to the window, and used to detect if the cursor is near a fly. Probably best to leave this one off. (default: false)</li>
 <li>eventDistanceToBug - If monitorMouseMovemenet is enabled, this is the distance from the bug in pixels which will trigger the near bug event. (default: 40)</li>
 <li>minTimeBetweenMultipy - When in 'multiply' mode, this is the minimum time in ms between a multiply event. (default: 1000)</li>
-<li>mouseOver - What to do when the mouse is over (or near) a fly. Can be 'fly', 'flyoff', 'die', 'multiply', or 'random'. See Modes. (default: random)</li>
+<li>mouseOver - What to do when the mouse is over (or near) a fly. Can be 'fly', 'flyoff' (if we the bug canFly), 'die', 'multiply', or 'random'. See Modes. (default: random)</li>
+<li>canFly - Whether or not to allow fly modes, and to use wings open animation (second row of sprite, default: true).
+<li>canDie - Whether or not to allow the bug to 'die' - need bottom row of sprite with dead version. (default: true)
+<li>zoom - Minimum amount to scale the bug, out of 10. So a zoom of 5 would randomly choose a zoom (css scale) value between 1/2 and 1 for each bug size.   (default: 10 - no zooming)</li>
+<li>maxLargeTurnDeg - When making a large turn, the maximum number of degrees to turn. (default: 150)</li>
+<li>maxSmallTurnDeg - When making a smaller turn, the maximum number of degrees to turn. (default: 10)</li>
+<li>maxWiggleDeg - When wiggling around the screen, this is the maximum number of degrees to turn. (default: 5)</li>
 </ul><h2>Modes</h2>
 
 <ul>
@@ -92,6 +122,7 @@
 <li>fly: The bug will fly away to another random point on the page</li>
 <li>flyoff: The bug will fly off the screen... and slowly work its way back</li>
 <li>multiply: The bug will spawn a new bug and both will fly away to other parts of the page</li>
+<li>nothing: Do nothing</li>
 <li>die: The bug will be struck dead, and fall to the bottom of the page</li>
 </ul><h2>Credits</h2>
 
@@ -118,7 +149,10 @@
     </div>
 
 <script type='text/javascript'>
+// load the fruit flies:
 new BugController();
+// load the spiders
+new SpiderController();
 </script>
 
   </body>
