@@ -16,7 +16,7 @@ Features
 Demo
 ----
 
-see project page: http://auz.github.io/Bug/ or http://jsfiddle.net/snfmn/
+see project page: http://auz.github.io/Bug/
 
 
 Dependancies
