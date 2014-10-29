@@ -19,7 +19,7 @@ Demo
 see project page: http://auz.github.io/Bug/
 
 
-Dependancies
+Dependencies
 ------------
 
 None, all native js code
