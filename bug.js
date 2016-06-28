@@ -13,7 +13,7 @@
  * https://github.com/Auz/Bug
  *
  * license: MIT-style license.
- * copyright: Copyright (c) 2013 Graham McNicoll
+ * copyright: Copyright (c) 2016 Graham McNicoll
  *
  *
  * Created for an aprils fool joke at Education.com 2013. I knew there was probably a script
@@ -143,11 +143,12 @@ var BugDispatch = {
         }
 
         // fly them in staggered:
+        this.spawnDelay = [];
         for (i = 0; i < numBugs; i++) {
             var delay = this.random(this.options.minDelay, this.options.maxDelay, true),
                 thebug = this.bugs[i];
             // fly the bug onto the page:
-            setTimeout((function(thebug) {
+            this.spawnDelay[i] = setTimeout((function(thebug) {
                 return function() {
                     if (that.options.canFly) {
                         thebug.flyIn();
@@ -173,12 +174,14 @@ var BugDispatch = {
 
     stop: function() {
         for (var i = 0; i < this.bugs.length; i++) {
+            if(this.spawnDelay[i]) clearTimeout(this.spawnDelay[i]);
             this.bugs[i].stop();
         }
     },
 
     end: function() {
         for (var i = 0; i < this.bugs.length; i++) {
+        	if(this.spawnDelay[i]) clearTimeout(this.spawnDelay[i]);
             this.bugs[i].stop();
             this.bugs[i].remove();
         }
@@ -194,6 +197,7 @@ var BugDispatch = {
 
     killAll: function() {
         for (var i = 0; i < this.bugs.length; i++) {
+        	if(this.spawnDelay[i]) clearTimeout(this.spawnDelay[i]);
             this.bugs[i].die();
         }
     },
@@ -400,6 +404,7 @@ var Bug = {
 
         this.stationary = false;
         this.bug = null;
+        this.active = true;
         this.wingsOpen = this.options.wingsOpen;
         this.transform = transform;
         this.walkIndex = 0;
@@ -448,6 +453,7 @@ var Bug = {
     },
 
     remove: function() {
+    	this.active = false;
         if (this.inserted && this.bug.parentNode) {
             this.bug.parentNode.removeChild(this.bug);
             this.inserted = false;
@@ -456,6 +462,7 @@ var Bug = {
 
     reset: function() {
         this.alive = true;
+        this.active = true;
         this.bug.style.bottom = '';
         this.bug.style.top = 0;
         this.bug.style.left = 0;
@@ -463,7 +470,7 @@ var Bug = {
 
     animate: function(t) {
 
-        if (!this.animating || !this.alive) return;
+        if (!this.animating || !this.alive || !this.active) return;
 
         var that = this;
         this.going = requestAnimFrame(function(t) {
@@ -533,7 +540,7 @@ var Bug = {
     },
 
     makeBug: function() {
-        if (!this.bug) {
+        if (!this.bug && this.active) {
             var row = (this.wingsOpen) ? '0' : '-' + this.options.bugHeight + 'px',
                 bug = document.createElement('div');
             bug.className = 'bug';
@@ -582,6 +589,8 @@ var Bug = {
         if (!this.bug) {
             this.makeBug();
         }
+        if(!this.bug) return;
+
         if (top && left) {
             this.setPos(top, left);
         } else {
@@ -706,6 +715,9 @@ var Bug = {
         if (!this.bug) {
             this.makeBug();
         }
+        
+        if(!this.bug) return;
+
         this.stop();
         // pick a random side:
         var side = Math.round(Math.random() * 4 - 0.5),
@@ -754,6 +766,9 @@ var Bug = {
         if (!this.bug) {
             this.makeBug();
         }
+        
+        if(!this.bug) return;
+
         this.stop();
         // pick a random side:
         var side = Math.round(Math.random() * 4 - 0.5),
@@ -847,7 +862,7 @@ var Bug = {
             that = this;
 
         this.dropTimer = requestAnimFrame(function(t) {
-            this._lastTimestamp = t;
+            that._lastTimestamp = t;
             that.dropping(t, startPos, finalPos, rotationRate, deathType);
         });
 
