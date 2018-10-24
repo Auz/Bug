@@ -466,6 +466,7 @@ var Bug = {
         this.bug.style.bottom = '';
         this.bug.style.top = 0;
         this.bug.style.left = 0;
+        this.bug.classList.remove('bug-dead');
     },
 
     animate: function(t) {
@@ -860,6 +861,8 @@ var Bug = {
             rotationRate = this.random(0, 20, true),
             startTime = Date.now(),
             that = this;
+        
+        this.bug.classList.add('bug-dead');
 
         this.dropTimer = requestAnimFrame(function(t) {
             that._lastTimestamp = t;
