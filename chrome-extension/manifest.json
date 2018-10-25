@@ -22,10 +22,7 @@
       "default_popup": "options.html"
     },
   "permissions": [
-    "https://*/*",
-    "http://*/*",
-    "storage",
-    "activeTab"
+    "storage"
   ],
   "icons": { 
   	"16": "bug-icon-16.png",
