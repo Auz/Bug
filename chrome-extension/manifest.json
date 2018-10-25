@@ -1,0 +1,36 @@
+{
+  "name": "Bug",
+  "short_name": "Bug",
+  "version": "1.0",
+  "manifest_version": 2,
+  "description": "Adds very realistic animated bugs (spiders and/or flies) to your chrome browser.",
+  "homepage_url": "https://auz.github.io/Bug/",
+
+  "options_ui": {
+    "page": "options.html",
+    "open_in_tab": false
+  },
+  
+  "content_scripts": [
+	{ 
+		"run_at" :"document_end",
+		"matches": ["http://*/*", "https://*/*"],
+		"js": ["bug.js"]
+	}
+  ],
+  "browser_action": {
+      "default_popup": "options.html"
+    },
+  "permissions": [
+    "https://*/*",
+    "http://*/*",
+    "storage",
+    "activeTab"
+  ],
+  "icons": { 
+  	"16": "bug-icon-16.png",
+    "48": "bug-icon-48.png",
+    "128": "bug-icon-128.png" 
+  }
+  
+}
