@@ -10,6 +10,7 @@ Features
 
 * Creates multiple fruit flys which fly and walk around the browser window.
 * Creates multiple spiders which walk around the browser window.
+* Creates multiple ladybugs which walk around the browser window.
 * Flys are responsive to mouse movements (optional) and mouse overs events.
 
 
@@ -44,8 +45,14 @@ or
 ```
 You can use SpiderController() as a shortcut for loading options and the sprite for the spiders. 
 
-```
+```js
   new SpiderController({'minBugs':2, 'maxBugs':6});
+```
+
+You also can use LadyBugController() as a shortcut for loading options and the sprite for the ladybugs. 
+
+```js
+  new LadyBugController({'minBugs':2, 'maxBugs':6});
 ```
 
 See example.html 
@@ -53,7 +60,7 @@ See example.html
 BugController constructor can optionally take an object of options. To make this js more async friendly, you can adjust the default options at the top of bug.js, and then instantiate at the bottom of the file as above. This will allow one to wrap the entire script in a closure to prevent any global window name space overlaps.
 
 Async code:
-```
+```js
   var targethead = window.document.getElementsByTagName("head")[0],
     loadedSpiders = false,
     jst = window.document.createElement("script");

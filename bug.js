@@ -358,6 +358,30 @@ var SpiderController = function() {
 }
 SpiderController.prototype = BugDispatch;
 
+var LadyBugController = function() {
+    var ladyBugOptions = {
+        imageSprite: 'ladybug-sprite.png',
+        bugWidth: 69,
+        bugHeight: 90,
+        num_frames: 7,
+        canFly: false,
+        canDie: true,
+        numDeathTypes: 2,
+        zoom: 6,
+        minDelay: 200,
+        maxDelay: 3000,
+        minSpeed: 7,
+        maxSpeed: 14,
+        minBugs: 2,
+        maxBugs: 4
+    };
+    this.options = mergeOptions(this.options, ladyBugOptions);
+    this.initialize.apply(this, arguments);
+
+}
+
+LadyBugController.prototype = BugDispatch;
+
 /***************/
 /**    Bug    **/
 /***************/
