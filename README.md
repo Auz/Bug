@@ -1,7 +1,7 @@
 Bug
 ===========
 
-Adds bugs to your page. 
+Adds bugs to your page.
 
 
 
@@ -10,13 +10,13 @@ Features
 
 * Creates multiple fruit flys which fly and walk around the browser window.
 * Creates multiple spiders which walk around the browser window.
-* Flys are responsive to mouse movements (optional) and mouse overs events.
+* Flys are responsive to mouse movements (optional) and mouseover events.
 
 
 Demo
 ----
 
-see project page: http://auz.github.io/Bug/
+See project page: http://auz.github.io/Bug/
 
 
 Dependencies
@@ -28,13 +28,15 @@ None, all native js code
 Compatibility
 -------------
 
-Works on all browsers that support CSS3 transforms, even mobile (that I've tested). See http://caniuse.com/transforms2d
+Works on all browsers that support CSS3 transforms, even mobile (that I've tested).
+
+See http://caniuse.com/transforms2d
 
 
-How to use 
+How to use
 ----------
 
-Include the JS somewhere, and then initialize with 
+Include the JS somewhere, and then initialize with
 ```js
   new BugController();
 ```
@@ -42,13 +44,13 @@ or
 ```js
   new BugController({'minBugs':10, 'maxBugs':50, 'mouseOver':'die'});
 ```
-You can use SpiderController() as a shortcut for loading options and the sprite for the spiders. 
+You can use SpiderController() as a shortcut for loading options and the sprite for the spiders.
 
 ```
   new SpiderController({'minBugs':2, 'maxBugs':6});
 ```
 
-See example.html 
+See example.html
 
 BugController constructor can optionally take an object of options. To make this js more async friendly, you can adjust the default options at the top of bug.js, and then instantiate at the bottom of the file as above. This will allow one to wrap the entire script in a closure to prevent any global window name space overlaps.
 
