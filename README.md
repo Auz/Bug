@@ -19,7 +19,7 @@ Demo
 See project page: http://auz.github.io/Bug/
 
 
-Dependencies
+Dependency
 ------------
 
 None, all native js code
@@ -33,7 +33,7 @@ Works on all browsers that support CSS3 transforms, even mobile (that I've teste
 See http://caniuse.com/transforms2d
 
 
-How to use
+How to use it
 ----------
 
 Include the JS somewhere, and then initialize with
@@ -104,7 +104,7 @@ Modes
 * flyoff: The bug will fly off the screen... and slowly work its way back (if 'canFly' is true)
 * multiply: The bug will spawn a new bug and both will fly away to other parts of the page
 * nothing: Do nothing
-* die: The bug will be struck dead, and fall to the bottom of the page
+* die: The bug will be struck dead, and fall to the bottom of this page
 
 Credits
 -------
