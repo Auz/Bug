@@ -1,12 +1,12 @@
 BUG
-/*/*/*
+------
 
 Adds bugs to your page.
 
 
 
 FEATURES
-*/*/*/*/*
+---------
 
 * Creates multiple fruit flys which fly and walk around the browser window.
 * Creates multiple spiders which walk around the browser window.
@@ -14,19 +14,19 @@ FEATURES
 
 
 DEMO
-*/*/*
+-----
 
 See project page: http://auz.github.io/Bug/
 
 
 DEPENDECIES
-*/*/*/*/*/*/*
+-----------
 
 None, all native js code
 
 
 COMPATIBILITY
-*/*/*/**/*/*/*
+-------------
 
 Works on all browsers that support CSS3 transforms, even mobile (that I've tested).
 
@@ -34,7 +34,7 @@ See http://caniuse.com/transforms2d
 
 
 HOW TO USE
-*/*/*/*
+----------
 
 Include the JS somewhere, and then initialize with
 ```js
@@ -73,7 +73,7 @@ Async code:
 ```
 
 OPTIONS
-*/*/*/*
+--------
 
 * minDelay - Minimum delay before a bug will appear on the page. (default: 500)
 * maxDelay - Maximum delay before a bug will appear on the page. (default: 10000)
@@ -97,7 +97,7 @@ OPTIONS
 * maxWiggleDeg - When wiggling around the screen, this is the maximum number of degrees to turn. (default: 5),
 
 MODES
-*/*/*
+-----
 
 * random: Randomly pick one of the other modes on each mouse over/near event
 * fly: The bug will fly away to another random point on the page (if 'canFly' is true)
@@ -107,7 +107,7 @@ MODES
 * die: The bug will be struck dead, and fall to the bottom of the page
 
 CREDITS
-*/*/*/*
+-------
 
 Original Screen Bug http://screen-bug.googlecode.com/git/index.html
 
