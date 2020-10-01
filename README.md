@@ -1,7 +1,7 @@
 Bug
 ===========
 
-Adds bugs to your page.
+Add bugs to your page.
 
 
 
