@@ -3,7 +3,10 @@ Bug
 
 Add bugs to your page.
 
-
+Introduction
+--------
+* Make interesting inteaction with you webpage.
+* Make different elements present on website like spiders and flies.
 
 Features
 --------
