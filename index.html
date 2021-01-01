@@ -1,24 +1,17 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <meta charset='utf-8'>
-    <meta http-equiv="X-UA-Compatible" content="chrome=1">
-    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-    <meta name="description" content="A small javascript library which adds bugs that walk and fly around your page">
+    <meta charset='utf-8'/>
+    <meta http-equiv="X-UA-Compatible" content="chrome=1"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+    <meta name="description" content="A small javascript library which adds bugs that walk and fly around your page"/>
     <link href='https://fonts.googleapis.com/css?family=Architects+Daughter' rel='stylesheet' type='text/css'>
-    <link rel="stylesheet" type="text/css" href="stylesheets/stylesheet.css" media="screen" />
-    <link rel="stylesheet" type="text/css" href="stylesheets/pygment_trac.css" media="screen" />
-    <link rel="stylesheet" type="text/css" href="stylesheets/print.css" media="print" />
-
-    <!--[if lt IE 9]>
-    <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
-    <![endif]-->
-
-<script type='text/javascript' src='javascripts/bug-min.js'></script>
-
+    <link rel="stylesheet" type="text/css" href="stylesheets/stylesheet.css" media="screen"/>
+    <link rel="stylesheet" type="text/css" href="stylesheets/pygment_trac.css" media="screen"/>
+    <link rel="stylesheet" type="text/css" href="stylesheets/print.css" media="print"/>
+    <script type='text/javascript' src='javascripts/bug-min.js'></script>
     <title>Bugs That Walk and Fly around your page</title>
   </head>
-
   <body>
     <header>
       <div class="inner">
@@ -27,49 +20,59 @@
         <a href="https://github.com/Auz/Bug" class="button"><small>View project on</small>GitHub</a>
       </div>
     </header>
-
     <div id="content-wrapper">
       <div class="inner clearfix">
         <section id="main-content">
           <h1>Bug</h1>
-
-<p>Adds bugs with javascript which walk on your page.</p>
-
-<h2>Features</h2>
-
-<ul>
-<li>Creates multiple fruit flies which fly and walk around the page, and/or,</li>
-<li>Creates multiple spiders which walk around the page.</li>
-<li>Flys are responsive to mouse movements (optional) and mouse overs events.</li>
-</ul><h2>Demo</h2>
-
-<p>See the source of this page (at the bottom)<br /></p>
-
-<h2>Dependancies</h2>
-
-<p>None, all native js code</p>
-
-<h2>Compatibility</h2>
-
-<p>Works on all browsers that support CSS3 transforms, even mobile (that I've tested). See <a href="http://caniuse.com/transforms2d">http://caniuse.com/transforms2d</a></p>
-
-<h2>How to use</h2>
-
-<p>Include the JS somewhere, and then initialize with </p>
-
-<div class="highlight"><pre>  <span class="k">new</span> <span class="nx">BugController</span><span class="p">();</span>
-</pre></div>
-
-<p>or</p>
-
-<div class="highlight"><pre>  <span class="k">new</span> <span class="nx">BugController</span><span class="p">({</span><span class="s1">'minBugs'</span><span class="o">:</span><span class="mi">10</span><span class="p">,</span> <span class="s1">'maxBugs'</span><span class="o">:</span><span class="mi">50</span><span class="p">,</span> <span class="s1">'mouseOver'</span><span class="o">:</span><span class="s1">'die'</span><span class="p">});</span>
-</pre></div>
-
-<p>Or spiders (helper class which loads spider defaults- otherwise the code is the same)</p>
-
-<div class="highlight"><pre>  <span class="k">new</span> <span class="nx">SpiderController</span><span class="p">();</span>
-</pre></div>
-
+          <p>Adds bugs with javascript which walk on your page.</p>
+          <h2>Features</h2>
+          <ul>
+            <li>Creates multiple fruit flies which fly and walk around the page, and/or,</li>
+            <li>Creates multiple spiders which walk around the page.</li>
+            <li>Flys are responsive to mouse movements (optional) and mouse overs events.</li>
+          </ul>
+          <h2>Demo</h2>
+          <p>See the source of this page (at the bottom)<br/></p>
+          <h2>Dependancies</h2>
+          <p>None, all native js code</p>
+          <h2>Compatibility</h2>
+          <p>Works on all browsers that support CSS3 transforms, even mobile (that I've tested). See <a href="http://caniuse.com/transforms2d">http://caniuse.com/transforms2d</a></p>
+          <h2>How to use</h2>
+          <p>Include the JS somewhere, and then initialize with </p>
+          <div class="highlight">
+            <pre>
+              <span class="k">new</span>
+              <span class="nx">BugController</span>
+              <span class="p">();</span>
+            </pre>
+          </div>
+          <p>or</p>
+          <div class="highlight">
+            <pre>
+              <span class="k">new</span>
+              <span class="nx">BugController</span>
+              <span class="p">({</span>
+              <span class="s1">'minBugs'</span>
+              <span class="o">:</span>
+              <span class="mi">10</span>
+              <span class="p">,</span>
+              <span class="s1">'maxBugs'</span>
+              <span class="o">:</span>
+              <span class="mi">50</span>
+              <span class="p">,</span>
+              <span class="s1">'mouseOver'</span>
+              <span class="o">:</span>
+              <span class="s1">'die'</span><span class="p">});</span>
+            </pre>
+          </div>
+          <p>Or spiders (helper class which loads spider defaults- otherwise the code is the same)</p>
+          <div class="highlight">
+            <pre>
+              <span class="k">new</span>
+              <span class="nx">SpiderController</span>
+              <span class="p">();</span>
+            </pre>
+          </div>
 <p>See example.html </p>
 
 <p>BugController constructor can optionally take an object of options. To make this js more async friendly, you can adjust the default options at the top of bug.js, and then instantiate at the bottom of the file as above. This will allow one to wrap the entire script in a closure to prevent any global window name space overlaps. Or you can load async with the usual async pattern:</p>
