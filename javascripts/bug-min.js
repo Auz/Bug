@@ -1,7 +1,7 @@
 /*
  Bug.js - https://github.com/Auz/Bug
  Released under MIT-style license.
- Original Screen Bug http://screen-bug.googlecode.com/git/index.html
+ Original Screen Bug https://web.archive.org/web/20160425201742/https://screen-bug.googlecode.com/git/index.html
 */
 var BugDispatch={options:{minDelay:500,maxDelay:1E4,minBugs:2,maxBugs:20,minSpeed:5,maxSpeed:10,maxLargeTurnDeg:150,maxSmallTurnDeg:10,maxWiggleDeg:5,imageSprite:"fly-sprite.png",bugWidth:13,bugHeight:14,num_frames:5,zoom:10,canFly:!0,canDie:!0,numDeathTypes:3,monitorMouseMovement:!1,eventDistanceToBug:40,minTimeBetweenMultipy:1E3,mouseOver:"random"},initialize:function(a){this.options=mergeOptions(this.options,a);this.options.minBugs>this.options.maxBugs&&(this.options.minBugs=this.options.maxBugs);
 this.modes=["multiply","nothing"];this.options.canFly&&this.modes.push("fly","flyoff");this.options.canDie&&this.modes.push("die");-1==this.modes.indexOf(this.options.mouseOver)&&(this.options.mouseOver="random");this.transform=null;this.transforms={Moz:function(a){this.bug.style.MozTransform=a},webkit:function(a){this.bug.style.webkitTransform=a},O:function(a){this.bug.style.OTransform=a},ms:function(a){this.bug.style.msTransform=a},Khtml:function(a){this.bug.style.KhtmlTransform=a},w3c:function(a){this.bug.style.transform=
