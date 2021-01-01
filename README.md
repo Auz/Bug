@@ -109,6 +109,6 @@ Modes
 Credits
 -------
 
-Original Screen Bug http://screen-bug.googlecode.com/git/index.html
+Original Screen Bug https://web.archive.org/web/20160425201742/https://screen-bug.googlecode.com/git/index.html
 
 Released under WTFPL license.
