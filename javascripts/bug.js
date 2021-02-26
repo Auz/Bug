@@ -5,7 +5,7 @@
 /**
  * @preserve Bug.js - https://github.com/Auz/Bug
  * Released under MIT-style license.
- * Original Screen Bug http://screen-bug.googlecode.com/git/index.html
+ * Original Screen Bug https://web.archive.org/web/20160425201742/https://screen-bug.googlecode.com/git/index.html
  */
 /**
  * Bug.js - Add bugs to your page
@@ -17,12 +17,12 @@
  *
  *
  * Created for an aprils fool joke at Education.com 2013. I knew there was probably a script
- * that did it already, and there was: http://screen-bug.googlecode.com/git/index.html.
+ * that did it already, and there was: https://web.archive.org/web/20160425201742/https://screen-bug.googlecode.com/git/index.html.
  * I used this as the starting point and heavily modified it, used sprite image animation,
  * and added many new features.
  *
  *
- * Original Screen Bug http://screen-bug.googlecode.com/git/index.html
+ * Original Screen Bug https://web.archive.org/web/20160425201742/https://screen-bug.googlecode.com/git/index.html
  * Copyright ©2011 Kernc (kerncece ^_^ gmail)
  * Released under WTFPL license.
  *
@@ -974,7 +974,7 @@ var SpawnBug = function() {
 };
 
 // debated about which pattern to use to instantiate each bug...
-// see http://jsperf.com/obj-vs-prototype-vs-other
+// see https://web.archive.org/web/20130406063955/http://jsperf.com/obj-vs-prototype-vs-other
 
 
 
