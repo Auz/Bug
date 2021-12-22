@@ -75,36 +75,36 @@ Async code:
 Options
 -------
 
-* minDelay - Minimum delay before a bug will appear on the page. (default: 500)
-* maxDelay - Maximum delay before a bug will appear on the page. (default: 10000)
-* minBugs - Minumum number of bugs to show. (default: 1)
-* maxBugs - Maximum number of bugs to show. (default: 20)
-* minSpeed - Minimum speed of a bug, in no particular units. (default: 1)
-* maxSpeed - Maximum speed of a bug, in no particular units. (default: 3)
-* imageSprite - Location of the fly sprite sheet. (default: 'fly-sprite.png')
-* bugWidth - The width of the fly sprite cell, and also div width. (default: 13)
-* bugHeight - The height of the fly sprite cell, and also div height. (default: 14)
-* num_frames - The number of frames in the sprite walk animation. (default: 5)
-* monitorMouseMovement - If enabled, a mousemove event will be added to the window, and used to detect if the cursor is near a fly. Probably best to leave this one off. (default: false)
-* eventDistanceToBug - If monitorMouseMovemenet is enabled, this is the distance from the bug in pixels which will trigger the near bug event. (default: 40)
-* minTimeBetweenMultipy - When in 'multiply' mode, this is the minimum time in ms between a multiply event. (default: 1000)
-* mouseOver - What to do when the mouse is over (or near) a fly. Can be 'fly', 'flyoff' (if we the bug canFly), 'die', 'multiply', or 'random'. See Modes. (default: random)
-* canFly - Whether or not to allow fly modes, and to use wings open animation (second row of sprite, default: true).
-* canDie - Whether or not to allow the bug to 'die' - need bottom row of sprite with dead version. (default: true)
-* zoom - Minimum amount to scale the bug, out of 10. So a zoom of 5 would randomly choose a zoom (css scale) value between 1/2 and 1 for each bug size.   (default: 10 - no zooming)
-* maxLargeTurnDeg - When making a large turn, the maximum number of degrees to turn. (default: 150)
-* maxSmallTurnDeg - When making a smaller turn, the maximum number of degrees to turn. (default: 10)
-* maxWiggleDeg - When wiggling around the screen, this is the maximum number of degrees to turn. (default: 5),
+* `minDelay` - Minimum delay before a bug will appear on the page. (default: 500)
+* `maxDelay` - Maximum delay before a bug will appear on the page. (default: 10000)
+* `minBugs` - Minumum number of bugs to show. (default: 1)
+* `maxBugs` - Maximum number of bugs to show. (default: 20)
+* `minSpeed` - Minimum speed of a bug, in no particular units. (default: 1)
+* `maxSpeed` - Maximum speed of a bug, in no particular units. (default: 3)
+* `imageSprite` - Location of the fly sprite sheet. (default: 'fly-sprite.png')
+* `bugWidth` - The width of the fly sprite cell, and also div width. (default: 13)
+* `bugHeight` - The height of the fly sprite cell, and also div height. (default: 14)
+* `num_frames` - The number of frames in the sprite walk animation. (default: 5)
+* `monitorMouseMovement` - If enabled, a mousemove event will be added to the window, and used to detect if the cursor is near a fly. Probably best to leave this one off. (default: false)
+* `eventDistanceToBug` - If monitorMouseMovemenet is enabled, this is the distance from the bug in pixels which will trigger the near bug event. (default: 40)
+* `minTimeBetweenMultiply` - When in 'multiply' mode, this is the minimum time in ms between a multiply event. (default: 1000)
+* `mouseOver` - What to do when the mouse is over (or near) a fly. Can be 'fly', 'flyoff' (if we the bug canFly), 'die', 'multiply', or 'random'. See Modes. (default: random)
+* `canFly` - Whether or not to allow fly modes, and to use wings open animation (second row of sprite, default: true).
+* `canDie` - Whether or not to allow the bug to 'die' - need bottom row of sprite with dead version. (default: true)
+* `zoom` - Minimum amount to scale the bug, out of 10. So a zoom of 5 would randomly choose a zoom (css scale) value between 1/2 and 1 for each bug size.   (default: 10 - no zooming)
+* `maxLargeTurnDeg` - When making a large turn, the maximum number of degrees to turn. (default: 150)
+* `maxSmallTurnDeg` - When making a smaller turn, the maximum number of degrees to turn. (default: 10)
+* `maxWiggleDeg` - When wiggling around the screen, this is the maximum number of degrees to turn. (default: 5),
 
 Modes
 -----
 
-* random: Randomly pick one of the other modes on each mouse over/near event
-* fly: The bug will fly away to another random point on the page (if 'canFly' is true)
-* flyoff: The bug will fly off the screen... and slowly work its way back (if 'canFly' is true)
-* multiply: The bug will spawn a new bug and both will fly away to other parts of the page
-* nothing: Do nothing
-* die: The bug will be struck dead, and fall to the bottom of the page
+* `random`: Randomly pick one of the other modes on each mouse over/near event
+* `fly`: The bug will fly away to another random point on the page (if 'canFly' is true)
+* `flyoff`: The bug will fly off the screen... and slowly work its way back (if 'canFly' is true)
+* `multiply`: The bug will spawn a new bug and both will fly away to other parts of the page
+* `nothing`: Do nothing
+* `die`: The bug will be struck dead, and fall to the bottom of the page
 
 Credits
 -------
