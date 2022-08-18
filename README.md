@@ -10,6 +10,7 @@ Features
 
 * Creates multiple fruit flys which fly and walk around the browser window.
 * Creates multiple spiders which walk around the browser window.
+* Creates multiple moths which walk around the browser window.
 * Flys are responsive to mouse movements (optional) and mouseover events.
 
 
@@ -49,6 +50,13 @@ You can use SpiderController() as a shortcut for loading options and the sprite 
 ```
   new SpiderController({'minBugs':2, 'maxBugs':6});
 ```
+
+You can use MothController() as a shortcut for loading options and the sprite for the moths.
+
+```
+  new MothController({'minBugs':1, 'maxBugs':3});
+```
+
 
 See example.html
 
