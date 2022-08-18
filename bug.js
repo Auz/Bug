@@ -56,7 +56,7 @@ var BugDispatch = {
         mouseOver: 'random' // can be 'fly', 'flyoff' (if the bug can fly), die', 'multiply', 'nothing' or 'random'
     },
 
-    initialize: function(options) {
+    initialize: function (options) {
 
         this.options = mergeOptions(this.options, options);
 
@@ -83,22 +83,22 @@ var BugDispatch = {
         this.transform = null;
 
         this.transforms = {
-            'Moz': function(s) {
+            'Moz': function (s) {
                 this.bug.style.MozTransform = s;
             },
-            'webkit': function(s) {
+            'webkit': function (s) {
                 this.bug.style.webkitTransform = s;
             },
-            'O': function(s) {
+            'O': function (s) {
                 this.bug.style.OTransform = s;
             },
-            'ms': function(s) {
+            'ms': function (s) {
                 this.bug.style.msTransform = s;
             },
-            'Khtml': function(s) {
+            'Khtml': function (s) {
                 this.bug.style.KhtmlTransform = s;
             },
-            'w3c': function(s) {
+            'w3c': function (s) {
                 this.bug.style.transform = s;
             }
         };
@@ -148,8 +148,8 @@ var BugDispatch = {
             var delay = this.random(this.options.minDelay, this.options.maxDelay, true),
                 thebug = this.bugs[i];
             // fly the bug onto the page:
-            this.spawnDelay[i] = setTimeout((function(thebug) {
-                return function() {
+            this.spawnDelay[i] = setTimeout((function (thebug) {
+                return function () {
                     if (that.options.canFly) {
                         thebug.flyIn();
                     } else {
@@ -165,29 +165,29 @@ var BugDispatch = {
 
         // add window event if required:
         if (this.options.monitorMouseMovement) {
-            window.onmousemove = function() {
+            window.onmousemove = function () {
                 that.check_if_mouse_close_to_bug();
             };
         }
 
     },
 
-    stop: function() {
+    stop: function () {
         for (var i = 0; i < this.bugs.length; i++) {
-            if(this.spawnDelay[i]) clearTimeout(this.spawnDelay[i]);
+            if (this.spawnDelay[i]) clearTimeout(this.spawnDelay[i]);
             this.bugs[i].stop();
         }
     },
 
-    end: function() {
+    end: function () {
         for (var i = 0; i < this.bugs.length; i++) {
-        	if(this.spawnDelay[i]) clearTimeout(this.spawnDelay[i]);
+            if (this.spawnDelay[i]) clearTimeout(this.spawnDelay[i]);
             this.bugs[i].stop();
             this.bugs[i].remove();
         }
     },
 
-    reset: function() {
+    reset: function () {
         this.stop();
         for (var i = 0; i < this.bugs.length; i++) {
             this.bugs[i].reset();
@@ -195,29 +195,29 @@ var BugDispatch = {
         }
     },
 
-    killAll: function() {
+    killAll: function () {
         for (var i = 0; i < this.bugs.length; i++) {
-        	if(this.spawnDelay[i]) clearTimeout(this.spawnDelay[i]);
+            if (this.spawnDelay[i]) clearTimeout(this.spawnDelay[i]);
             this.bugs[i].die();
         }
     },
 
-    add_events_to_bug: function(thebug) {
+    add_events_to_bug: function (thebug) {
         var that = this;
         if (thebug.bug) {
             if (thebug.bug.addEventListener) {
-                thebug.bug.addEventListener('mouseover', function(e) {
+                thebug.bug.addEventListener('mouseover', function (e) {
                     that.on_bug(thebug);
                 });
             } else if (thebug.bug.attachEvent) {
-                thebug.bug.attachEvent('onmouseover', function(e) {
+                thebug.bug.attachEvent('onmouseover', function (e) {
                     that.on_bug(thebug);
                 });
             }
         }
     },
 
-    check_if_mouse_close_to_bug: function(e) {
+    check_if_mouse_close_to_bug: function (e) {
         e = e || window.event;
         if (!e) {
             return;
@@ -251,11 +251,11 @@ var BugDispatch = {
 
     },
 
-    near_bug: function(bug) {
+    near_bug: function (bug) {
         this.on_bug(bug);
     },
 
-    on_bug: function(bug) {
+    on_bug: function (bug) {
         if (!bug.alive) {
             return;
         }
@@ -305,7 +305,7 @@ var BugDispatch = {
                 this.bugs.push(b);
                 // watch out for spawning too quickly:
                 this.multiplyDelay = true;
-                setTimeout(function() {
+                setTimeout(function () {
                     // add event to this bug:
                     that.add_events_to_bug(b);
                     that.multiplyDelay = false;
@@ -315,7 +315,7 @@ var BugDispatch = {
         }
     },
 
-    random: function(min, max, round) {
+    random: function (min, max, round) {
         if (min == max) return ((round) ? Math.round(min) : min);
 
         var result = ((min - 0.5) + (Math.random() * (max - min + 1)));
@@ -330,12 +330,12 @@ var BugDispatch = {
 
 };
 
-var BugController = function() {
+var BugController = function () {
     this.initialize.apply(this, arguments);
 }
 BugController.prototype = BugDispatch;
 
-var SpiderController = function() {
+var SpiderController = function () {
     var spiderOptions = {
         imageSprite: 'spider-sprite.png',
         bugWidth: 69,
@@ -358,6 +358,28 @@ var SpiderController = function() {
 }
 SpiderController.prototype = BugDispatch;
 
+var MothController = function () {
+    var mothOptions = {
+        imageSprite: 'moth-sprite.png',
+        bugWidth: 200,
+        bugHeight: 132,
+        num_frames: 2,
+        canFly: false,
+        canDie: false,
+        zoom: 10,
+        minDelay: 200,
+        maxDelay: 3000,
+        minSpeed: 6,
+        maxSpeed: 25,
+        minBugs: 5,
+        maxBugs: 10
+    };
+    this.options = mergeOptions(this.options, mothOptions);
+    this.initialize.apply(this, arguments);
+}
+
+MothController.prototype = BugDispatch;
+
 /***************/
 /**    Bug    **/
 /***************/
@@ -373,7 +395,7 @@ var Bug = {
 
     },
 
-    initialize: function(transform, options) {
+    initialize: function (transform, options) {
 
         this.options = mergeOptions(this.options, options);
 
@@ -423,20 +445,20 @@ var Bug = {
 
     },
 
-    go: function() {
+    go: function () {
         if (this.transform) {
             this.drawBug();
             var that = this;
 
             this.animating = true;
 
-            this.going = requestAnimFrame(function(t) {
+            this.going = requestAnimFrame(function (t) {
                 that.animate(t);
             });
         }
     },
 
-    stop: function() {
+    stop: function () {
         this.animating = false;
         if (this.going) {
             clearTimeout(this.going);
@@ -452,15 +474,15 @@ var Bug = {
         }
     },
 
-    remove: function() {
-    	this.active = false;
+    remove: function () {
+        this.active = false;
         if (this.inserted && this.bug.parentNode) {
             this.bug.parentNode.removeChild(this.bug);
             this.inserted = false;
         }
     },
 
-    reset: function() {
+    reset: function () {
         this.alive = true;
         this.active = true;
         this.bug.style.bottom = '';
@@ -469,12 +491,12 @@ var Bug = {
         this.bug.classList.remove('bug-dead');
     },
 
-    animate: function(t) {
+    animate: function (t) {
 
         if (!this.animating || !this.alive || !this.active) return;
 
         var that = this;
-        this.going = requestAnimFrame(function(t) {
+        this.going = requestAnimFrame(function (t) {
             that.animate(t);
         });
 
@@ -540,7 +562,7 @@ var Bug = {
 
     },
 
-    makeBug: function() {
+    makeBug: function () {
         if (!this.bug && this.active) {
             var row = (this.wingsOpen) ? '0' : '-' + this.options.bugHeight + 'px',
                 bug = document.createElement('div');
@@ -560,7 +582,7 @@ var Bug = {
 
     },
 
-    setPos: function(top, left) {
+    setPos: function (top, left) {
         this.bug.top = top || this.random(this.options.edge_resistance, document.documentElement.clientHeight - this.options.edge_resistance);
 
         this.bug.left = left || this.random(this.options.edge_resistance, document.documentElement.clientWidth - this.options.edge_resistance);
@@ -568,7 +590,7 @@ var Bug = {
         this.moveBug(this.bug.left, this.bug.top, (90 - this.angle_deg));
     },
 
-    moveBug: function(x, y, deg) {
+    moveBug: function (x, y, deg) {
         // keep track of where we are:
         this.bug.left = x;
         this.bug.top = y;
@@ -585,12 +607,12 @@ var Bug = {
 
     },
 
-    drawBug: function(top, left) {
+    drawBug: function (top, left) {
 
         if (!this.bug) {
             this.makeBug();
         }
-        if(!this.bug) return;
+        if (!this.bug) return;
 
         if (top && left) {
             this.setPos(top, left);
@@ -603,7 +625,7 @@ var Bug = {
         }
     },
 
-    toggleStationary: function() {
+    toggleStationary: function () {
         this.stationary = !this.stationary;
         this.next_stationary();
         var ypos = (this.wingsOpen) ? '0' : '-' + this.options.bugHeight + 'px';
@@ -615,7 +637,7 @@ var Bug = {
         }
     },
 
-    walkFrame: function() {
+    walkFrame: function () {
         var xpos = (-1 * (this.walkIndex * this.options.bugWidth)) + 'px',
             ypos = (this.wingsOpen) ? '0' : '-' + this.options.bugHeight + 'px';
         this.bug.style.backgroundPosition = xpos + ' ' + ypos;
@@ -623,7 +645,7 @@ var Bug = {
         if (this.walkIndex >= this.options.num_frames) this.walkIndex = 0;
     },
 
-    fly: function(landingPosition) {
+    fly: function (landingPosition) {
         var currentTop = this.bug.top,
             currentLeft = this.bug.left,
             diffx = (currentLeft - landingPosition.left),
@@ -673,7 +695,7 @@ var Bug = {
 
     },
 
-    flyRand: function() {
+    flyRand: function () {
         this.stop();
         var landingPosition = {};
         landingPosition.top = this.random(this.options.edge_resistance, document.documentElement.clientHeight - this.options.edge_resistance);
@@ -682,7 +704,7 @@ var Bug = {
         this.startFlying(landingPosition);
     },
 
-    startFlying: function(landingPosition) {
+    startFlying: function (landingPosition) {
 
         var currentTop = this.bug.top,
             currentLeft = this.bug.left,
@@ -707,17 +729,17 @@ var Bug = {
 
         // start animation:
         var that = this;
-        this.flyperiodical = setInterval(function() {
+        this.flyperiodical = setInterval(function () {
             that.fly(landingPosition);
         }, 10);
     },
 
-    flyIn: function() {
+    flyIn: function () {
         if (!this.bug) {
             this.makeBug();
         }
-        
-        if(!this.bug) return;
+
+        if (!this.bug) return;
 
         this.stop();
         // pick a random side:
@@ -763,12 +785,12 @@ var Bug = {
         this.startFlying(landingPosition);
     },
 
-    walkIn: function() {
+    walkIn: function () {
         if (!this.bug) {
             this.makeBug();
         }
-        
-        if(!this.bug) return;
+
+        if (!this.bug) return;
 
         this.stop();
         // pick a random side:
@@ -811,7 +833,7 @@ var Bug = {
 
     },
 
-    flyOff: function() {
+    flyOff: function () {
         this.stop();
         // pick a random side to fly off to, where 0 is top and continuing clockwise.
         var side = this.random(0, 3),
@@ -842,7 +864,7 @@ var Bug = {
         this.startFlying(style);
     },
 
-    die: function() {
+    die: function () {
         this.stop();
         //pick death style:
         var deathType = this.random(0, this.options.numDeathTypes - 1);
@@ -851,7 +873,7 @@ var Bug = {
         this.drop(deathType);
     },
 
-    drop: function(deathType) {
+    drop: function (deathType) {
         var startPos = this.bug.top,
             d = document,
             e = d.documentElement,
@@ -861,17 +883,17 @@ var Bug = {
             rotationRate = this.random(0, 20, true),
             startTime = Date.now(),
             that = this;
-        
+
         this.bug.classList.add('bug-dead');
 
-        this.dropTimer = requestAnimFrame(function(t) {
+        this.dropTimer = requestAnimFrame(function (t) {
             that._lastTimestamp = t;
             that.dropping(t, startPos, finalPos, rotationRate, deathType);
         });
 
     },
 
-    dropping: function(t, startPos, finalPos, rotationRate, deathType) {
+    dropping: function (t, startPos, finalPos, rotationRate, deathType) {
         var elapsedTime = t - this._lastTimestamp,
             deltaPos = (0.002 * (elapsedTime * elapsedTime)),
             newPos = startPos + deltaPos;
@@ -903,7 +925,7 @@ var Bug = {
             return;
         }
 
-        this.dropTimer = requestAnimFrame(function(t) {
+        this.dropTimer = requestAnimFrame(function (t) {
             that.dropping(t, startPos, finalPos, rotationRate, deathType);
         });
 
@@ -915,14 +937,14 @@ var Bug = {
         this.moveBug(this.bug.left, newPos, this.angle_deg);
     },
 
-    twitch: function(deathType, legPos) {
+    twitch: function (deathType, legPos) {
         //this.bug.style.back
         if (!legPos) legPos = 0;
         var that = this;
         if (deathType === 0 || deathType === 1) {
-            that.twitchTimer = setTimeout(function() {
+            that.twitchTimer = setTimeout(function () {
                 that.bug.style.backgroundPosition = '-' + ((deathType * 2 + (legPos % 2)) * that.options.bugWidth) + 'px 100%';
-                that.twitchTimer = setTimeout(function() {
+                that.twitchTimer = setTimeout(function () {
                     legPos++;
                     that.bug.style.backgroundPosition = '-' + ((deathType * 2 + (legPos % 2)) * that.options.bugWidth) + 'px 100%';
                     that.twitch(deathType, ++legPos);
@@ -932,30 +954,30 @@ var Bug = {
     },
 
     /* helper methods: */
-    rad2deg: function(rad) {
+    rad2deg: function (rad) {
         return rad * this.rad2deg_k;
     },
-    deg2rad: function(deg) {
+    deg2rad: function (deg) {
         return deg * this.deg2rad_k;
     },
-    random: function(min, max, plusminus) {
+    random: function (min, max, plusminus) {
         if (min == max) return min;
         var result = Math.round(min - 0.5 + (Math.random() * (max - min + 1)));
         if (plusminus) return Math.random() > 0.5 ? result : -result;
         return result;
     },
 
-    next_small_turn: function() {
+    next_small_turn: function () {
         this.small_turn_counter = Math.round(Math.random() * 10);
     },
-    next_large_turn: function() {
+    next_large_turn: function () {
         this.large_turn_counter = Math.round(Math.random() * 40);
     },
-    next_stationary: function() {
+    next_stationary: function () {
         this.toggle_stationary_counter = this.random(50, 300);
     },
 
-    bug_near_window_edge: function() {
+    bug_near_window_edge: function () {
         this.near_edge = 0;
         if (this.bug.top < this.options.edge_resistance)
             this.near_edge |= this.NEAR_TOP_EDGE;
@@ -968,7 +990,7 @@ var Bug = {
         return this.near_edge;
     },
 
-    getPos: function() {
+    getPos: function () {
         if (this.inserted && this.bug && this.bug.style) {
             return {
                 'top': parseInt(this.bug.top, 10),
@@ -980,7 +1002,7 @@ var Bug = {
 
 };
 
-var SpawnBug = function() {
+var SpawnBug = function () {
     var newBug = {},
         prop;
     for (prop in Bug) {
@@ -1000,8 +1022,8 @@ var SpawnBug = function() {
  * Helper methods:
  **/
 
-var mergeOptions = function(obj1, obj2, clone) {
-    if (typeof(clone) == 'undefined') {
+var mergeOptions = function (obj1, obj2, clone) {
+    if (typeof (clone) == 'undefined') {
         clone = true;
     }
     var newobj = (clone) ? cloneOf(obj1) : obj1;
@@ -1013,8 +1035,8 @@ var mergeOptions = function(obj1, obj2, clone) {
     return newobj;
 };
 
-var cloneOf = function(obj) {
-    if (obj == null || typeof(obj) != 'object')
+var cloneOf = function (obj) {
+    if (obj == null || typeof (obj) != 'object')
         return obj;
 
     var temp = obj.constructor(); // changed
@@ -1029,12 +1051,12 @@ var cloneOf = function(obj) {
 
 /* Request animation frame polyfill */
 /* http://paulirish.com/2011/requestanimationframe-for-smart-animating/ */
-window.requestAnimFrame = (function() {
+window.requestAnimFrame = (function () {
     return window.requestAnimationFrame ||
         window.webkitRequestAnimationFrame ||
         window.mozRequestAnimationFrame ||
         window.oRequestAnimationFrame ||
-        window.msRequestAnimationFrame || function( /* function */ callback, /* DOMElement */ element) {
+        window.msRequestAnimationFrame || function ( /* function */ callback, /* DOMElement */ element) {
             window.setTimeout(callback, 1000 / 60);
         };
 })();
